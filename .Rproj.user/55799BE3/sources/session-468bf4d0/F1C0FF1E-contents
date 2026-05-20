@@ -1,0 +1,101 @@
+:root {
+  --blue-soft: #2f4ea1;
+  --blue-deep: #1f3a8a;
+  --teal: #3ea7ad;
+  --ink: #0f172a;
+  --muted: #475569;
+  --white: #ffffff;
+}
+
+
+
+.site-logo {
+  width: 130px !important;
+  height: 65px !important;
+  background-size: contain !important;
+}
+
+.side-bar {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(59, 130, 246, 0.10),
+      transparent 35%
+    ),
+
+    radial-gradient(
+      circle at center,
+      rgba(45, 212, 191, 0.06),
+      transparent 40%
+    ),
+
+    radial-gradient(
+      circle at bottom right,
+      rgba(59, 130, 246, 0.08),
+      transparent 35%
+    ),
+
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f8fafc 100%
+    );
+}
+
+.main-content h1,
+.main-content h2,
+.main-content h3 {
+  color: var(--blue-deep);
+}
+
+a {
+  color: var(--blue-soft);
+}
+
+a:hover {
+  color: var(--teal);
+}
+
+.nav-list .nav-list-item .nav-list-link.active {
+  color: var(--teal);
+}
+
+.site-title {
+  color: var(--ink);
+}
+
+.warqube-hero {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 16px;
+  background:
+    radial-gradient(800px 400px at 20% 15%, rgba(59, 130, 246, 0.12), transparent 60%),
+    radial-gradient(600px 300px at 80% 20%, rgba(45, 212, 191, 0.10), transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.warqube-hero img {
+  width: 140px;
+  max-width: 30%;
+}
+
+.warqube-hero h1 {
+  color: #2f4ea1;
+  margin-top: 0;
+}
+
+.side-bar .site-footer,
+.site-footer {
+  display: none !important;
+}
+
+.tagline {
+  font-size: 0.9rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blue-soft);
+  margin-bottom: 1.5rem;
+}
