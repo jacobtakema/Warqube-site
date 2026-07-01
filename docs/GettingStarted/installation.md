@@ -1,6 +1,7 @@
 ---
 title: Installation
-nav_order: 3
+parent: Getting Started
+nav_order: 2
 layout: default
 ---
 

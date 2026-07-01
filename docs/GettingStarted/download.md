@@ -1,6 +1,7 @@
 ---
 title: Download
-nav_order: 2
+parent: Getting Started
+nav_order: 1
 layout: default
 ---
 
