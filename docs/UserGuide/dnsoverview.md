@@ -64,7 +64,7 @@ hostname count.
 
 ### Per WARC file
 
-**Per WARC-bestand** shows the DNS-related response-record count and distinct
+**Per WARC file** shows the DNS-related response-record count and distinct
 hostname count for each WARC file. The table also shows the first and last
 associated crawl dates. Point to a bar to see the file name and both counts.
 

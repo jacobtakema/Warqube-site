@@ -36,7 +36,7 @@ when restoring playback information from an existing database. The interface
 may display the following message while this happens:
 
 ```text
-pywb wordt gestart...
+pywb is starting...
 ```
 
 Wait for the status to change before selecting **Open**.
@@ -49,7 +49,7 @@ To open a suggested archived page:
 2. Wait until **Playback status** displays:
 
    ```text
-   pywb playback actief.
+   pywb playback is active.
    ```
 
 3. Select a URL under **Aangetroffen seed URL's**.
@@ -71,7 +71,7 @@ The field is not validated before Warqube builds the local replay address. Use
 an original captured target URL rather than assuming that every pasted replay
 address will be interpreted correctly.
 
-After a replay opens, select **Open huidige replay in browser** to open the
+After a replay opens, select **Open current replay in browser** to open the
 current local replay address outside the embedded frame. The pywb calendar is
 available in this browser view, allowing you to choose between available
 captures of the URL.
@@ -90,7 +90,7 @@ only be replayed when the playback collection can resolve the requested
 capture and read the associated WARC content.
 
 Warqube does not provide its own capture calendar or date selector in the
-embedded view. To use the pywb calendar, select **Open huidige replay in
+embedded view. To use the pywb calendar, select **Open current replay in
 browser**. The calendar and any other controls shown there belong to pywb, not
 to the surrounding Warqube dashboard.
 
@@ -101,7 +101,7 @@ to the surrounding Warqube dashboard.
 Warqube displays:
 
 ```text
-Geen collectie geladen.
+No collection loaded.
 ```
 
 This means that Playback has no active collection identifier.
@@ -119,7 +119,7 @@ is available.
 Warqube displays:
 
 ```text
-pywb-proces leeft mogelijk, maar poort 8080 luistert niet.
+The pywb process may be running, but port 8080 is not listening.
 ```
 
 The application did not find a service listening on the local playback port.
@@ -133,9 +133,9 @@ service from this page.
 During collection processing or database loading, Warqube can also display:
 
 ```text
-pywb gestart maar healthcheck faalde (zie console).
-pywb is niet correct gestart bij laden van bestaande database.
-pywb is niet correct gestart; playback niet vernieuwd.
+pywb started, but its health check failed (see the console).
+pywb did not start correctly while loading the existing database.
+pywb did not start correctly; playback was not refreshed.
 ```
 
 For any of these messages:
@@ -144,7 +144,7 @@ For any of these messages:
 2. Do not treat playback as available until **Playback status** reports:
 
    ```text
-   pywb playback actief.
+   pywb playback is active.
    ```
 
 The source code does not provide a confirmed recovery procedure beyond the
@@ -155,7 +155,7 @@ automatic startup and status checks.
 Before you choose a URL, the playback area displays:
 
 ```text
-Kies een seed URL en klik op Open om pywb playback te starten.
+Choose a seed URL and click Open to start pywb playback.
 ```
 
 1. Select a suggested URL or enter an original captured target URL.
@@ -186,7 +186,7 @@ missing captures, inaccessible WARC files or playback behaviour.
 - The manual URL field accepts any non-empty text and performs no format or
   capture-availability validation.
 - Warqube uses direct replay mode. The embedded view provides no Warqube
-  capture calendar or date selector; use **Open huidige replay in browser** to
+  capture calendar or date selector; use **Open current replay in browser** to
   access the pywb calendar.
 - The active status confirms that port 8080 is listening. It does not confirm
   that the selected collection or requested URL can be replayed successfully.

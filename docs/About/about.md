@@ -59,17 +59,16 @@ that require closer review.
 
 ## Current status
 
-Warqube is under active development. The current version provides a working
-local application for WARC validation, metadata and content analysis, playback
-and the exploration of derived quality indicators.
+Warqube v1.0.0 is the initial public release. It provides a working local
+application for WARC validation, metadata and content analysis, playback and
+the exploration of derived quality indicators.
 
 The documentation currently focuses on the behaviour of the application. More
 guidance on interpreting results against the WARC specification, archival best
 practice and organisational policies will be added over time.
 
-Warqube is presently developed and tested primarily for Windows. Features,
-installation requirements and documentation may change as the project moves
-towards wider release.
+Warqube is currently developed and tested for Windows. Features, installation
+requirements and documentation may change in later releases.
 
 ## Acknowledgements
 

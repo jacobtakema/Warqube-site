@@ -20,7 +20,8 @@ Warqube follows several design principles:
 - Original WARC files remain untouched.
 - Analysis results are stored separately from archived content.
 - Established web archiving tools are reused for validation, WARC processing and playback.
-- All processing is reproducible from the original WARC files.
+- Analysis results are designed to be reproducible from the original WARC
+  files when the same processing environment remains available.
 
 ## Scope and evidence
 
@@ -84,14 +85,16 @@ When you start a new analysis, Warqube performs the following confirmed
 sequence.
 
 1. **R starts the local application.** The Windows launcher checks for
-   `Rscript`, and the R startup script selects the bundled Python executable
+   `Rscript`, and the R startup script selects the locally installed embedded
+   Python executable
    before it launches the Shiny application in a browser.
 2. **Warqube prepares the database.** It resolves the database name to a
    `.duckdb` file, creates the schema when required and opens a read-write
    connection pool. For a new processing run, it clears the principal analysis
    tables in the selected database before writing new results.
-3. **JHOVE validates and characterises each WARC file.** R starts the bundled
-   JHOVE command through Java with the WARC module and requests XML output.
+3. **JHOVE validates and characterises each WARC file.** R starts the locally
+   installed JHOVE 1.34.0 command through Java with the WARC module and
+   requests XML output.
    Warqube reads file size, format, version, status and validation messages
    from that output, stores them in DuckDB and deletes the temporary XML
    directory at the end of the step.
@@ -174,7 +177,8 @@ record stream; DuckDB receives selected fields from that stream.
 
 ### JHOVE and Java
 
-**Confirmed Warqube role:** Warqube invokes the bundled JHOVE command with the
+**Confirmed Warqube role:** the Warqube installer downloads, installs and
+validates JHOVE 1.34.0 locally. During analysis, Warqube invokes it with the
 `WARC-kb` module. JHOVE runs on Java and produces XML reports. Warqube converts
 selected report fields and messages into file-level and validation-message
 rows in DuckDB. No other Java role is confirmed by the source.
@@ -183,17 +187,13 @@ rows in DuckDB. No other Java role is confirmed by the source.
 characterisation tool. Warqube retains the parsed findings, not the temporary
 XML report files.
 
-### HTML text extraction and Trafilatura
+### HTML text extraction
 
-**Confirmed Warqube role:** the current runtime extractor uses warcio to select
-HTML response records and then removes scripts, styles and markup with Python
-text operations before storing the text in `HtmlText`.
-
-The R processing step and its source file still use the name Trafilatura, and
-the installer includes the `trafilatura` Python package. However, the Python
-extractor called by the current workflow does not import or call Trafilatura.
-An active Trafilatura role in text extraction therefore cannot be confirmed
-from the current source.
+**Confirmed Warqube role:** the runtime extractor uses warcio to select HTML
+response records and read their payloads. It uses charset-normalizer to decode
+the payload, removes scripts, styles and HTML tags, normalises the remaining
+text and stores it in `HtmlText`. Presidio and spaCy subsequently use that text
+for PII analysis.
 
 ### Presidio and spaCy
 
@@ -213,8 +213,9 @@ information.
 **Confirmed Warqube role:** pywb provides replay. Warqube creates a collection
 configuration, generates a CDXJ index from the original WARC files and starts
 pywb through embedded Python on `127.0.0.1`, normally using port `8080`. The
-Shiny playback page builds local pywb URLs for embedded replay and for opening
-the pywb interface in a browser.
+root `pywb_home/config.yaml` is generated when Warqube prepares a collection;
+it is not part of a clean installation. The Shiny playback page builds local
+pywb URLs for embedded replay and for opening the pywb interface in a browser.
 
 **General technology context:** a replay index locates captures; it does not
 contain the full archived responses. pywb uses the index to find content in the
@@ -290,8 +291,6 @@ it does not create an independent archive copy for playback.
 - The current source defines component behaviour but does not document why R,
   DuckDB, JHOVE, warcio, Presidio, spaCy or pywb were selected over
   alternatives.
-- The source confirms that Trafilatura is installed, but not that the current
-  text-extraction runtime uses it.
 
 ## Next steps
 

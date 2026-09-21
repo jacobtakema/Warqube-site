@@ -54,6 +54,10 @@ database. Processing begins only after you select a WARC directory and choose
 Warqube opens on the **Load Content** page. From here, choose one of two
 workflows.
 
+The **Documentation** link in the header opens this User Guide in a new browser
+tab. To stop Warqube, select **Exit** at the bottom of the sidebar. This also
+stops the local pywb playback process started by the current Warqube session.
+
 ### Analyse a WARC directory
 
 Use this option when the WARC files have not previously been processed by
@@ -101,7 +105,7 @@ Warqube cannot locate the R installation. Confirm that R is installed and that
 
 ### A component is missing
 
-If a message refers to missing Python, R packages, Python modules or the SpaCy
+If a message refers to missing Python, R packages, Python modules or the spaCy
 language model, run `install_warqube.bat` again from the Warqube project
 directory. The application cannot start until its installed components are
 available.
@@ -131,9 +135,10 @@ current Windows user.
 ## What a successful start confirms
 
 A successful start confirms that the dashboard and the components loaded at
-start-up are available. It does not yet verify:
+start-up are available. The installer has already validated Java and the local
+JHOVE installation, but a successful start does not yet verify:
 
-- that Java and JHOVE can process a WARC file;
+- that JHOVE can process the selected WARC files;
 - that a selected directory contains usable WARC files;
 - that sufficient disk space or memory is available; or
 - that website playback can use its local port.

@@ -137,13 +137,13 @@ If no candidates match the current filters, **NER Class distribution**
 displays:
 
 ```text
-Geen data beschikbaar voor huidige filters.
+No data available for the current filters.
 ```
 
 **NER Score Trend** displays:
 
 ```text
-Geen trenddata beschikbaar voor huidige filters.
+No trend data available for the current filters.
 ```
 
 The detail and summary tables remain empty without a separate message.

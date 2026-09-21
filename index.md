@@ -32,7 +32,7 @@ Many archives receive web archives from external parties. Those web archives dif
 
 | ------- | ------- |
 | WARC validation | Quality assurance |
-| Policy checking | Content analysis |
+| Filename checks | Content analysis |
 | Website playback | PII detection  |
 | Mimetype analysis | DuckDB storage |
 | Deduplication analysis  | Local-first |
@@ -49,7 +49,9 @@ Warqube is designed for:
 
 ## Ready to get started?
 
-Download coming soon!
+Warqube v1.0.0 is the initial public release. See [Download](/docs/GettingStarted/download.html)
+for the source and installation requirements, or go directly to the
+[Warqube repository on GitHub](https://github.com/jacobtakema/Warqube).
 
 
 <script>

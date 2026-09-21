@@ -134,11 +134,11 @@ Warqube can also display one of these literal messages when record data cannot
 be found or read:
 
 ```text
-<geen headers gevonden>
-<headers konden niet gelezen worden>
-<geen leesbare headers gevonden>
-<geen payload gevonden>
-<geen leesbare payload gevonden>
+<no headers found>
+<headers could not be read>
+<no readable headers found>
+<no payload found>
+<no readable payload found>
 ```
 
 The source code does not provide a confirmed recovery procedure for these

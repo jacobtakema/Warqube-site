@@ -7,7 +7,7 @@ layout: default
 
 # Investigating Error Messages
 
-Use the **Error Messages** dashboard to find WARC files with validation
+Use the **Error messages** dashboard to find WARC files with validation
 messages and inspect records from those files. Start with the two summary
 charts, then filter the table to focus on a file or message.
 
@@ -23,7 +23,7 @@ file cannot be used.
 
 ## When to use this page
 
-Open **Error Messages** after the **Overview** or **WARC files** dashboard
+Open **Error messages** after the **Overview** or **WARC files** dashboard
 shows validation findings. Use it when you need to:
 
 - identify the most frequently recorded messages;

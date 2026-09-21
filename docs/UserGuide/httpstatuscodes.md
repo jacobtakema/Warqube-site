@@ -42,7 +42,7 @@ The results update when you change a setting. The available groupings are:
   code;
 - **Status code per WARC file**, which divides each status-code bar by WARC
   file; and
-- **Statusklasse (2xx/3xx/...)**, which combines status codes into 1xx, 2xx,
+- **Status class (2xx/3xx/...)**, which combines status codes into 1xx, 2xx,
   3xx, 4xx, 5xx and **Other/Unknown** classes.
 
 In **Status code per WARC file**, the chart stacks the counts for the WARC
@@ -101,7 +101,7 @@ If the analysis contains no response records with a status code, the chart
 remains empty and the table displays:
 
 ```text
-Geen HTTP-statuscodes gevonden. Controleer of de HttpStatus-kolom wordt gevuld tijdens het inlezen.
+No HTTP status codes found. Check whether the HttpStatus column is populated during import.
 ```
 
 The message states that no HTTP status codes were found. The source code does
