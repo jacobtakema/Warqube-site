@@ -12,6 +12,10 @@ files that require closer examination. The dashboard presents file sizes,
 crawl dates, validation statuses, revisit records, WARCinfo records and
 descriptive file information.
 
+<figure>
+  <img src="/assets/images/inspectingwarc/warcfiles.png" alt="Warqube WARC files dashboard">
+</figure>
+
 ## Purpose
 
 This dashboard helps you move from the collection-level summary on

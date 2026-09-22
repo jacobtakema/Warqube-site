@@ -11,6 +11,10 @@ Use the **WARC content** dashboard to understand which content types occur in
 the analysed web archive. It counts mimetypes, groups them into attention
 categories and lists the response and revisit records associated with them.
 
+<figure>
+  <img src="/assets/images/exploringcontent/warccontent.png" alt="Warqube WARC content dashboard">
+</figure>
+
 ## Purpose
 
 This dashboard helps you recognise the composition of a web archive and find

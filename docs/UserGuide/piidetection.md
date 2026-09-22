@@ -12,6 +12,10 @@ possible personally identifiable information (PII). Treat every detected
 entity as a candidate that requires review; the dashboard does not confirm
 that the text is personal information.
 
+<figure>
+  <img src="/assets/images/pii/piidetection.png" alt="Warqube PII Detection dashboard">
+</figure>
+
 ## Purpose
 
 This dashboard helps you locate possible PII in text extracted from archived

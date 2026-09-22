@@ -11,6 +11,10 @@ Use the **Overview** dashboard to check the scope and general condition of the
 loaded web archive. It summarises the WARC files, validation messages, crawl
 dates and filename compliance so that you can decide what to examine next.
 
+<figure>
+  <img src="/assets/images/homepage/overview.png" alt="Warqube Overview dashboard">
+</figure>
+
 ## Purpose
 
 The dashboard helps you confirm that Warqube has analysed the expected files

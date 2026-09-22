@@ -11,6 +11,10 @@ Use **Playback** to open an archived URL from the loaded web archive. Select a
 suggested seed URL or enter an original target URL, wait until local playback
 is active and then select **Open**.
 
+<figure>
+  <img src="/assets/images/playback/playback.png" alt="Warqube Playback page showing an archived website replay">
+</figure>
+
 ## Purpose
 
 Playback lets you inspect archived web pages as pages rather than as WARC
@@ -52,7 +56,7 @@ To open a suggested archived page:
    pywb playback is active.
    ```
 
-3. Select a URL under **Aangetroffen seed URL's**.
+3. Select a URL under **Detected seed URLs**.
 4. Confirm that the URL appears in **Seed URL / replay URL**.
 5. Select **Open**.
 6. Review the replay displayed below the controls.
@@ -169,7 +173,7 @@ The code does not define a specific Warqube message for a missing replay or
 missing page resources.
 
 1. Confirm that the entered URL matches an archived target URL.
-2. Try a URL offered under **Aangetroffen seed URL's**.
+2. Try a URL offered under **Detected seed URLs**.
 3. Retain the replay address and relevant console output if the problem
    persists.
 

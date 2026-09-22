@@ -11,6 +11,10 @@ Use the **Error messages** dashboard to find WARC files with validation
 messages and inspect records from those files. Start with the two summary
 charts, then filter the table to focus on a file or message.
 
+<figure>
+  <img src="/assets/images/errormessages/errormessages.png" alt="Warqube Error messages dashboard">
+</figure>
+
 ## Purpose
 
 This dashboard helps you identify recurring validation messages and the WARC

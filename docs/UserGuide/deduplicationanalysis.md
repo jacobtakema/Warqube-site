@@ -12,6 +12,10 @@ payload digest within a WARC file or with records from an earlier crawl date.
 The dashboard identifies repeated payloads; it does not determine whether two
 WARC files are identical.
 
+<figure>
+  <img src="/assets/images/identifyingduplicates/Deduplicationanalysis.png" alt="Warqube Deduplication Analysis dashboard">
+</figure>
+
 ## Purpose
 
 This dashboard helps you assess how often captured content occurs more than

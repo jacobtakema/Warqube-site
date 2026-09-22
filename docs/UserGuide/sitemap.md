@@ -11,6 +11,10 @@ Use **Site Map** to visualise the URL-path structure of archived response
 records. Choose whether to include all WARC files, one WARC file or one crawl
 type, then select **Generate site map**.
 
+<figure>
+  <img src="/assets/images/exploringsitestructure/sitestructuresunburst.png" alt="Warqube Site Map dashboard">
+</figure>
+
 ## Purpose
 
 The site map helps you recognise common branches and deeper path segments in

@@ -11,6 +11,10 @@ Use **DNS Overview** to review DNS-related response records in the web archive.
 Start with the hostname view, then group the results by crawl date or WARC file
 when you need to compare where and when the records occur.
 
+<figure>
+  <img src="/assets/images/dnslookups/dnsoverview.png" alt="Warqube DNS Overview dashboard">
+</figure>
+
 ## Purpose
 
 This dashboard helps you identify the hostnames recorded in captured DNS

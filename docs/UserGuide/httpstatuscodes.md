@@ -11,6 +11,10 @@ Use **HTTP Status Codes** to see which HTTP status codes occur in the archived
 response records. Start with the overall distribution, then group the results
 by WARC file or status-code class when you need more detail.
 
+<figure>
+  <img src="/assets/images/httpstatuscodes/httpsstatuscodes.png" alt="Warqube HTTP Status Codes dashboard">
+</figure>
+
 ## Purpose
 
 This dashboard helps you identify the responses recorded during a crawl. You

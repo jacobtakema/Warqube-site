@@ -11,6 +11,10 @@ The **Load Content** page is the starting point for working with a web archive.
 Use it to start a new analysis from a directory of WARC files or to load an
 existing Warqube database.
 
+<figure>
+  <img src="/assets/images/loading/load.png" alt="Warqube Load Content page">
+</figure>
+
 ## Purpose
 
 **Load Content** connects Warqube to the source files or analysis results that

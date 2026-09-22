@@ -11,6 +11,10 @@ Use **Depth Analysis** to compare the URL-path depth of response records across
 crawl dates, crawl types and WARC files. Start by selecting **Analyse depth**;
 Warqube then displays the depth charts and file-level statistics.
 
+<figure>
+  <img src="/assets/images/analysingcrawldepth/depthanalysis.png" alt="Warqube Depth Analysis dashboard">
+</figure>
+
 ## Purpose
 
 This dashboard helps you recognise how archived URLs are distributed across

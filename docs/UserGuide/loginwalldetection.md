@@ -11,6 +11,10 @@ Use **Login Wall Detection** to find WARC records whose target URIs contain
 terms associated with login or account access. Treat every result as a
 candidate: Warqube does not confirm that a login wall was present.
 
+<figure>
+  <img src="/assets/images/detectingloginwalls/loginwall.png" alt="Warqube Login Wall Detection dashboard">
+</figure>
+
 ## Purpose
 
 This dashboard helps you identify records that may lead to login pages or

@@ -11,6 +11,10 @@ Use the **WARC Records Viewer** to find individual records and inspect their
 headers and payload content. Filter the record list first, then select one row
 to open that record in the viewer.
 
+<figure>
+  <img src="/assets/images/inspectingrecords/recordsviewer.png" alt="Warqube WARC Records Viewer">
+</figure>
+
 ## Purpose
 
 The viewer helps you examine the records indexed during an analysis. It brings
