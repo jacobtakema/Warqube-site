@@ -15,12 +15,10 @@ before you begin an analysis.
 Complete the [installation](installation.html) before starting Warqube. Keep
 all files and subdirectories in the Warqube project directory together.
 
-Start Warqube from the project directory: the directory containing
-`start_warqube.bat`.
-
 ## Start Warqube
 
-Run the following Windows batch file:
+Open the following Windows batch file in the Warqube directory, or invoke it
+from a Command Prompt:
 
 ```text
 start_warqube.bat
@@ -30,6 +28,10 @@ Warqube opens a command window and starts the application in your web browser.
 Keep the command window open while using Warqube. It displays progress and
 error messages and closes the application when the process ends.
 
+The launcher locates the exact R version recorded in `renv.lock` and sets the
+Warqube directory as the working directory automatically. R does not need to be
+on `PATH`, and the batch file can be invoked from another working directory.
+
 ## What to expect
 
 The command window first displays:
@@ -38,9 +40,10 @@ The command window first displays:
 Starting Warqube...
 ```
 
-Further messages appear while Warqube loads. When start-up succeeds, the
-command window reports that Warqube has loaded and is ready, and the dashboard
-opens in the default web browser.
+The launcher then reports the required R version, any accessible versions it
+detects, and the selected `Rscript.exe` path. Further messages appear while
+Warqube loads. When start-up succeeds, the command window reports that Warqube
+has loaded successfully and the dashboard opens in the default web browser.
 
 The dashboard runs locally. The exact local address may differ between
 sessions and is selected automatically.
@@ -90,25 +93,31 @@ to restore website playback.
 
 ## If Warqube does not start
 
-### R cannot be found
+### No suitable R installation is found
 
 If the command window displays:
 
 ```text
-ERROR: Rscript.exe not found.
-
-Please install R and make sure Rscript is available.
+ERROR: No suitable R installation found. Install accessible R 4.5.3, or set WARQUBE_RSCRIPT to its full Rscript.exe path. Changing PATH is not required.
 ```
 
-Warqube cannot locate the R installation. Confirm that R is installed and that
-`Rscript` is available from the Windows command line.
+Warqube could not locate an accessible R 4.5.3 installation. Install that exact
+version, or set `WARQUBE_RSCRIPT` to the full path of its `Rscript.exe` as
+described in the [installation instructions](installation.html). An older or
+newer R version is not selected automatically.
+
+### R selection fails before Warqube starts
+
+If the command window reports `R selection failed`, read the diagnostic printed
+immediately above it. Windows PowerShell or an R installation location may be
+restricted by system policy. The launcher does not modify `PATH`, the registry
+or the saved PowerShell execution policy.
 
 ### A component is missing
 
 If a message refers to missing Python, R packages, Python modules or the spaCy
-language model, run `install_warqube.bat` again from the Warqube project
-directory. The application cannot start until its installed components are
-available.
+language model, run `install_warqube.bat` again. The application cannot start
+until its installed components are available.
 
 ### The application stops with an error
 

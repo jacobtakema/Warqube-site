@@ -17,9 +17,11 @@ Before running the installer, ensure that the following requirements are met:
 
 - **Windows.** The installer downloads the 64-bit Windows embedded distribution
   of Python and uses Windows batch files.
-- **R 4.4.0 or later.** The installer stops if an older R version is detected.
-- **`Rscript` available from the command line.** The installation batch file
-  invokes `Rscript` directly.
+- **R 4.5.3.** The Windows launcher requires the exact R version recorded in
+  `renv.lock`. It does not automatically select an older or newer R release.
+- **Windows PowerShell.** The launcher uses the Windows PowerShell installation
+  included with Windows to locate and validate R. It does not change the saved
+  PowerShell execution policy.
 - **Java available as `java`.** The installer uses Java to install and validate
   JHOVE. It does not install Java or require a particular Java version.
 - **Internet access during installation.** The installer may download JHOVE,
@@ -34,24 +36,36 @@ Keep the Warqube directory structure intact. In particular, the project must
 contain `renv.lock` and the `python` directory. A JHOVE installation is not
 included in a clean copy of Warqube; the installer creates it.
 
-Run the installer from the root of the Warqube project: the directory that
-contains `install_warqube.bat` and `install_warqube.R`.
-
-On Windows, run:
+Run the Windows installer by opening `install_warqube.bat` in the extracted
+Warqube directory, or invoke it from a Command Prompt:
 
 ```text
 install_warqube.bat
 ```
 
-The batch file runs:
+The batch file uses `select_r.ps1` to find and validate the required R version,
+then uses `run_with_r.bat` to run `install_warqube.R`. R does not need to be on
+`PATH`. The launcher checks standard system and per-user installation folders,
+R registry entries, other R installation folders and executables on `PATH`.
+It sets the Warqube directory as the working directory automatically, including
+when the batch file is started from another directory or a UNC location.
 
-```text
-Rscript install_warqube.R
+Normally, no R setting is required: the launcher finds a matching R
+installation automatically. If R is installed in a portable or non-standard
+location, you can explicitly select it from **Command Prompt (CMD)**. In the
+same Command Prompt window, set `WARQUBE_RSCRIPT` to the full path of its
+`Rscript.exe`, then run the installer:
+
+```bat
+set "WARQUBE_RSCRIPT=D:\Portable R\R-4.5.3\bin\Rscript.exe"
+install_warqube.bat
 ```
 
-The installer uses the current working directory as the project root. Starting
-it from another directory may therefore cause files to be created or resolved
-in the wrong location.
+This setting is temporary and applies only to that Command Prompt window. It
+does not modify Warqube's scripts, source code or configuration. The selected
+`Rscript.exe` must report the exact R version recorded in `renv.lock` (R 4.5.3
+for Warqube v1.0.0). If it reports another version or cannot be used, the
+launcher continues searching other locations for a matching installation.
 
 ## What the installer does
 
@@ -144,8 +158,7 @@ The batch file reports `Installation completed successfully` only when the R
 installation script exits without an error. At that point the local JHOVE
 installation and the required R and Python components have been validated.
 
-After a successful installation, Warqube can be started from the project root
-with:
+After a successful installation, start Warqube by opening:
 
 ```text
 start_warqube.bat
@@ -154,3 +167,25 @@ start_warqube.bat
 At start-up, Warqube selects `python_embed/python.exe` explicitly. If the early
 R packages `shiny` or `here` are unavailable, the start script attempts to
 install them from CRAN before opening the application.
+
+## Installation troubleshooting
+
+### No suitable R installation is found
+
+The launcher prints every accessible R version it detects and only selects the
+exact version recorded in `renv.lock`. If selection fails, install R 4.5.3 or
+set `WARQUBE_RSCRIPT` as described above. Adding R to `PATH` is not required.
+
+### PowerShell is blocked
+
+The launcher starts Windows PowerShell without loading a profile and applies an
+execution-policy setting only to that process. An organisation-wide policy can
+still prevent the selection script from running; in that case, contact the
+system administrator responsible for the device.
+
+### Installation stops after R is selected
+
+Keep the messages shown before `Installation failed`; they contain the specific
+error from JHOVE, `renv`, Python or another installation step. Confirm that
+Java is available as `java` and that the computer can reach the required
+download services, then run `install_warqube.bat` again.

@@ -87,6 +87,60 @@ a:hover {
   margin-top: 0;
 }
 
+.warqube-download-cta {
+  display: flex;
+  justify-content: center;
+  margin: -0.75rem 0 2.25rem;
+}
+
+.warqube-download-cta--left {
+  justify-content: flex-start;
+  margin: 1.25rem 0 1.5rem;
+}
+
+.warqube-download-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.7rem 1.1rem;
+  border: 1px solid rgba(47, 78, 161, 0.24);
+  border-radius: 10px;
+  background:
+    radial-gradient(160px 80px at 15% 10%, rgba(59, 130, 246, 0.12), transparent 70%),
+    radial-gradient(160px 80px at 85% 20%, rgba(45, 212, 191, 0.11), transparent 70%),
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 4px 12px rgba(31, 58, 138, 0.08);
+  color: var(--blue-deep);
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+.warqube-download-button:hover {
+  border-color: rgba(62, 167, 173, 0.55);
+  box-shadow: 0 6px 16px rgba(31, 58, 138, 0.12);
+  color: var(--blue-deep);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.warqube-download-button:focus-visible {
+  outline: 3px solid rgba(62, 167, 173, 0.28);
+  outline-offset: 3px;
+}
+
+.warqube-download-icon {
+  display: inline-grid;
+  width: 1.65rem;
+  height: 1.65rem;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(47, 78, 161, 0.09);
+  color: var(--blue-soft);
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
 .side-bar .site-footer,
 .site-footer {
   display: none !important;

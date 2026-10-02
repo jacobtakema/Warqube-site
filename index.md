@@ -12,6 +12,13 @@ nav_order: 1
   </div>
 </div>
 
+<div class="warqube-download-cta">
+  <a class="warqube-download-button" href="/docs/GettingStarted/download.html">
+    <span class="warqube-download-icon" aria-hidden="true">↓</span>
+    <span>Download Warqube</span>
+  </a>
+</div>
+
 ## Assess the quality of your web archives with confidence
 Warqube is a local desktop application for validating, exploring and analysing WARC-based web archives. Designed for digital preservation professionals, web archivists, records managers and researchers.
 
