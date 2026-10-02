@@ -58,3 +58,4 @@ for the source and installation requirements, or go directly to the
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 
+Warqube is an open-source project developed from practical digital preservation work. It is provided as-is, without commercial support or service-level commitments. Development is driven by practical needs, experimentation and available capacity.

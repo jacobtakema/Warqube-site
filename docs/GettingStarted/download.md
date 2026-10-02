@@ -18,3 +18,5 @@ Warqube currently supports Windows. Before installing it, make sure that R
 4.4.0 or later and Java are available from the command line. Continue with the
 [installation instructions](installation.html) for the complete prerequisites
 and installer steps.
+
+Warqube is an open-source project developed from practical digital preservation work. It is provided as-is, without commercial support or service-level commitments. Development is driven by practical needs, experimentation and available capacity.

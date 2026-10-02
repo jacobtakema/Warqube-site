@@ -15,6 +15,8 @@ combined validation, quality assurance, analysis and playback in one local
 workflow. Warqube was developed to bring those activities together and make
 the structure and quality of WARC collections easier to investigate.
 
+Warqube is an open-source project developed from practical digital preservation work. It is provided as-is, without commercial support or service-level commitments. Development is driven by practical needs, experimentation and available capacity.
+
 ## Why Warqube was created
 
 Rather than replacing established web archiving tools, Warqube integrates them
