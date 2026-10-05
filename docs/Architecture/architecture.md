@@ -110,17 +110,22 @@ sequence.
 6. **Warqube prepares the pywb collection.** It gives pywb access to the source
    WARC directory, normally through a Windows directory junction, and runs a
    pywb reindex operation. This creates the collection's `index.cdxj` outside
-   the Warqube database. If junction creation fails, the current code falls
-   back to the source directory directly.
+   the Warqube database. If a junction is unavailable or inappropriate, such
+   as for some network-backed paths, it falls back to the resolved source
+   directory directly. Indexing and replay receive that same resolved path.
 7. **Python extracts text from HTML responses.** The current extractor reads
    response records whose HTTP content type contains `html`, removes scripts,
    styles and HTML tags, normalises whitespace and stores the resulting text
    and basic record context in DuckDB.
-8. **Presidio and spaCy identify possible PII.** The detector analyses stored
-   text as Dutch, combines spaCy-backed analysis with configured pattern
-   recognisers and stores candidate entity types, text fragments, positions,
-   scores and recogniser names. The [PII Detection page](../UserGuide/piidetection.html)
-   documents the current coverage limits.
+8. **Presidio, structured recognisers and spaCy identify possible PII.** The
+   detector analyses stored text as Dutch, combines language-model analysis
+   with general and Dutch pattern recognisers, and stores candidate entity
+   types, text fragments, positions, scores and recogniser names. It processes
+   all eligible texts in transactional batches of 100; zero-hit texts are
+   completed and failed texts remain pending for retry. The analyser and its
+   expensive language model are loaded once rather than once per text. The
+   [PII Detection page](../UserGuide/piidetection.html) documents the current
+   interpretation and coverage limits.
 9. **Warqube creates derived database views.** These views support WARC naming
    checks and URL-depth analysis without copying another full result set.
 10. **Warqube switches to presentation.** It opens a read-only database pool
@@ -197,11 +202,26 @@ for PII analysis.
 
 ### Presidio and spaCy
 
-**Confirmed Warqube role:** Presidio supplies the entity-analysis framework.
-Warqube configures it for Dutch and adds pattern recognisers for several Dutch
-formatted identifiers. spaCy supplies the Dutch `nl_core_news_lg` language
-model used by the analyser. Warqube stores the returned candidates in
-`pii_entities` and adds summary fields to `HtmlText`.
+**Confirmed Warqube role:** Presidio supplies the entity-analysis framework
+and general recognisers. Warqube configures it for Dutch and adds structured
+recognisers for Dutch identifiers, including postcode candidates, mobile
+numbers and checksum-validated IBANs; Presidio's Dutch phone recogniser also
+uses Dutch context for landline candidates. spaCy supplies the Dutch
+`nl_core_news_lg` model for linguistic recognition. Warqube stores the returned
+candidates in `pii_entities` and adds summary fields to `HtmlText`.
+
+Dutch PC6 candidates are normalised and checked offline against the frozen
+postcode resource in `data/postcodes`. The shipped corpus is the deduplicated
+union of CBS 2015 v2 and 2025 v1. Corpus members are stored with recogniser
+`DutchPostcodeRecognizer.CBSKnown` and score `0.95`; other syntactically valid
+candidates, or candidates processed when the corpus is unavailable, use
+`DutchPostcodeRecognizer.Unconfirmed` and score `0.50`. Non-membership is not
+invalidity because the pinned snapshots are not complete historical coverage.
+The index and manifest record source provenance and integrity data, and the
+resource's source-specific attribution licences remain separate from the
+application's GPLv3 code licence. Maintainers can reproduce an update with
+`tools/build_postcode_index.py` and the pinned hashes in
+`data/postcodes/sources.json`; this is not an end-user or analysis-time step.
 
 **General technology context:** entity recognition identifies candidate spans
 of text and assigns types and scores. Those results require interpretation;
@@ -261,6 +281,13 @@ For a new analysis, Warqube derives a collection identifier from the selected
 WARC-directory path. It configures pywb to reach that directory, builds the
 CDXJ index and starts a local pywb process. The Shiny dashboard does not itself
 reconstruct archived pages.
+
+On Windows, Warqube normally exposes the source through the collection's
+`archive` junction. If junction creation fails, it switches to direct archive
+mode. In that mode both the pywb indexer and replay configuration use the
+resolved original source path; the empty collection-local `archive` directory
+is not treated as the source. A successful fallback is therefore not an
+analysis failure and does not copy the WARCs locally.
 
 When Warqube opens an existing database, it reads the stored source directory,
 collection identifier and playback port. It then attempts to restore the pywb

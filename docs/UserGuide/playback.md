@@ -35,6 +35,13 @@ Before opening a replay, confirm that:
   the database; and
 - **Playback status** reports that local playback is active.
 
+The source directory may be on a local disk or an accessible mapped/network
+location. Warqube first attempts its normal Windows archive-path setup. Where
+a directory junction cannot be used, it falls back to the resolved source
+directory directly. A successful direct fallback is normal and does not copy
+the complete WARC collection into the Warqube installation. Indexing and
+replay use the same resolved archive source.
+
 Warqube starts the local playback service while processing a collection and
 when restoring playback information from an existing database. The interface
 may display the following message while this happens:
@@ -180,10 +187,20 @@ missing page resources.
 The source code does not identify whether an unsuccessful replay is caused by
 missing captures, inaccessible WARC files or playback behaviour.
 
+### A network source is unavailable
+
+Playback continues to depend on the original WARC directory after analysis.
+If a mapped drive is disconnected, credentials have expired or a network
+share is temporarily unavailable, reconnect the same source location before
+trying the replay again. The analytical dashboards can remain available from
+DuckDB even while playback cannot read the original WARC content.
+
 ## Limitations
 
 - Playback depends on the local playback service, its collection index and
   access to the original WARC files.
+- Local, mapped and network-backed WARC directories are supported, but their
+  recorded source location must remain available for later playback.
 - The suggested URL list is not a complete list of archived URLs. It contains
   at most 200 status-200 HTML response candidates and excludes URLs ending in
   several common resource extensions.

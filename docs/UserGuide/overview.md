@@ -15,6 +15,9 @@ dates and filename compliance so that you can decide what to examine next.
   <img src="/assets/images/homepage/overview.png" alt="Warqube Overview dashboard">
 </figure>
 
+The screenshot shows one example collection. The displayed record types and
+counts come from the loaded analysis and are not fixed application values.
+
 ## Purpose
 
 The dashboard helps you confirm that Warqube has analysed the expected files
@@ -30,13 +33,28 @@ individual WARC files, validation messages or archived content.
 
 ## Understanding the results
 
-### Collection summary
+### Collection scale
 
-The summary cards report:
+The first row describes the size and record composition of the collection:
 
 | Result | Meaning |
 | --- | --- |
-| **Total WARC files** | The number of WARC files recorded in the analysis. |
+| **Total WARC files** | The authoritative number of WARC files recorded in the analysis. |
+| **Total WARC Records** | The number of rows already indexed by warcio and stored in `WarcInhoud`. Opening Overview does not rescan the WARC files. |
+| **Average Records per WARC** | Total indexed WARC records divided by **Total WARC files**. |
+| **Records by WARC-Type** | A data-driven breakdown of indexed records by the WARC-Type values found in the collection. Missing or empty values are shown as unknown. |
+
+The WARC-Type breakdown can include `warcinfo`. This describes the composition
+of the complete record population. The separate WARCinfo checks under **File
+checks** describe potentially notable file-level structure, so the two results
+answer different questions.
+
+### Validation, capture profile and file checks
+
+The remaining metrics are grouped by their purpose:
+
+| Result | Meaning |
+| --- | --- |
 | **Valid WARC Files** | The number of files classified as well-formed and valid. |
 | **Not Valid WARC Files** | The number of files classified as not well-formed. |
 | **Fullharvest WARC Files** | The number of indexed WARC files that do not contain a revisit record. |
@@ -45,7 +63,6 @@ The summary cards report:
 | **WARC Version(s)** | The distinct WARC versions found in the analysis. |
 | **Average Size (MB)** | The average WARC file size in megabytes. |
 | **WARC files > 1GB** | The number of WARC files larger than 1 GB. |
-| **WARCinfo Records (total)** | The total number of WARCinfo records found. |
 | **Average WARCinfo Records per File** | The average number of WARCinfo records among files that contain them. |
 | **Files with >1 WARCinfo Record** | The number of files containing more than one WARCinfo record. |
 
@@ -84,6 +101,8 @@ whether the content of a WARC file is valid.
 - The full-harvest and incremental counts distinguish files by whether they
   contain revisit records. They do not confirm how the original crawl was
   configured.
+- **Records by WARC-Type** reflects the types actually indexed in this
+  collection; the set of labels is not fixed.
 - Several values under **WARC Version(s)** show that the analysis contains
   more than one WARC version. Review the individual files if that mixture is
   unexpected.
@@ -97,7 +116,8 @@ whether the content of a WARC file is valid.
 
 ## Limitations
 
-- The dashboard provides totals and averages, not file-level evidence.
+- The dashboard provides totals, averages and a record-type composition, not
+  file-level evidence.
 - **Not Valid WARC Files** specifically counts files classified as not
   well-formed; it must not be read as a count of every possible validation
   status.

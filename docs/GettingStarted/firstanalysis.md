@@ -16,7 +16,7 @@ dashboard.
 Ensure that:
 
 - Warqube starts successfully;
-- the WARC files are available in one directory; and
+- the WARC files are available in one local, mapped or network directory; and
 - you have chosen a name for the analysis database.
 
 Warqube searches the selected directory for files ending in `.warc` or
@@ -53,6 +53,12 @@ This directory is inside the Warqube project directory.
 
 Keep Warqube, the browser and the command window open. Do not move or remove
 the selected WARC files while they are being processed.
+
+On Windows, Warqube may use the selected source directory directly when its
+normal archive-path setup cannot create a directory junction, as can happen
+with network-backed locations. A successful direct fallback is not a
+processing failure and does not copy the complete collection into Warqube.
+Keep the source location accessible for later playback.
 
 Warqube displays a progress window headed:
 

@@ -16,6 +16,9 @@ that the text is personal information.
   <img src="/assets/images/pii/piidetection.png" alt="Warqube PII Detection dashboard">
 </figure>
 
+The screenshot illustrates the dashboard layout. Entity types, recognisers,
+counts and scores are data-driven and differ between collections.
+
 ## Purpose
 
 This dashboard helps you locate possible PII in text extracted from archived
@@ -52,6 +55,54 @@ To review the results:
 The entity and recogniser choices come from the values stored in the loaded
 Warqube database. The source code does not define a fixed set that must appear
 in every analysis.
+
+### How candidates are recognised
+
+Warqube combines three kinds of recognition:
+
+- **Structured recognition** identifies formatted Dutch candidates such as
+  postcodes, mobile numbers, context-supported landline numbers and IBANs.
+  IBAN candidates must also pass checksum validation.
+- **Presidio recognition** supplies the analysis framework and recognisers for
+  structured entities such as email addresses, IP addresses and URLs.
+- **Dutch spaCy recognition** provides linguistic entity recognition where
+  context is relevant, including candidate names, organisations and locations.
+
+Not every entity is produced by spaCy or another probabilistic language model.
+Pattern matches can also be false positives, and linguistic recognition can
+miss or misclassify text. The recogniser name and score help interpret a
+candidate; neither confirms that it is legally personal data.
+
+### Dutch postcode recognition
+
+Postcode recognition is performed entirely offline during WARC analysis:
+
+1. Warqube finds a syntactically plausible Dutch PC6 candidate.
+2. It normalises letter case and whitespace without changing the stored text
+   position.
+3. It checks the normalised value against a bundled postcode corpus derived
+   from the official CBS **2015 v2** and **2025 v1** snapshots.
+4. It stores the candidate with explicit provenance and confidence.
+
+The frozen corpus contains 468,933 unique PC6 values. It is bundled with the
+Warqube release; analysis makes no CBS or PDOK API call and a running instance
+does not update the corpus silently. The source data has its own attribution
+and licensing conditions, separate from Warqube's GPLv3 code licence. See the
+[postcode resource notice](https://github.com/jacobtakema/Warqube/blob/main/data/postcodes/README.md)
+for source details and maintainer regeneration instructions.
+
+| Recogniser | Stored score | Meaning |
+| --- | ---: | --- |
+| `DutchPostcodeRecognizer.CBSKnown` | 0.95 | The normalised PC6 occurs in at least one bundled CBS-derived snapshot. |
+| `DutchPostcodeRecognizer.Unconfirmed` | 0.50 | The candidate is syntactically plausible but is absent from the available corpus, or the corpus could not be used. |
+
+`CBSKnown` confirms corpus membership only. It does not establish that the
+text is personal data or that the postcode was valid on the WARC capture date.
+The corpus intentionally combines two reviewed snapshots rather than every
+year, and it does not cover every historical, recent or special-delivery code.
+For that reason, `Unconfirmed` means lower-confidence candidate, not invalid
+postcode. Because the dashboard initially filters out scores below 0.80,
+lower the score filter to 0.50 to review unconfirmed postcode candidates.
 
 ### Filter the candidates
 
@@ -168,14 +219,15 @@ To broaden the results:
   the original HTML context around a candidate.
 - The detection language is configured as Dutch. The source code does not
   confirm equivalent detection quality for content in other languages.
-- During one WARC-directory processing run, Warqube submits at most 100
-  previously unprocessed extracted texts for PII detection. The source code
-  contains no loop that continues with further batches.
+- Warqube processes all eligible extracted texts in bounded batches of 100;
+  100 is a batch size, not a collection-wide limit. Texts with no candidates
+  are marked complete so they are not left pending indefinitely.
 - Only candidates with a score of at least 0.5 are stored during processing.
   Setting **Minimal NER score** below 0.5 cannot reveal candidates that were
   discarded before storage.
-- Errors while detecting entities in an individual extracted text are handled
-  as an empty result and are not shown on this dashboard.
+- If detection fails for an individual text, Warqube reports a warning and
+  leaves that text pending for a later retry instead of recording an empty
+  successful result. The dashboard does not provide a retry control.
 - Pattern-based candidates can match formatted numbers or text that is not
   personal information. Other recognisers can also return false positives or
   miss relevant text.
